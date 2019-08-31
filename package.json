@@ -1,0 +1,11 @@
+{
+  "name": "botvk",
+  "version": "1.0.1",
+  "description": "Бот для получения информации о e-mail",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan",
+  "license": "ISC"
+}
