@@ -14,25 +14,25 @@ const { updates } = vk;
 
 updates.hear(['/start', 'Начать'], async (context) => {
     await context.send(`
-        С помощью данного бота можно узнать информацию о электронной почте!
-        Достаточно лишь отправить боту e-mail.
+    С помощью данного бота можно узнать информацию о электронной почте!
+    Достаточно лишь отправить боту e-mail.
 
-        Введите /help для получения помощи.
+    Введите /help для получения помощи.
     `);
 });
 
 updates.hear('/help', async (context) => {
     await context.send(`
-        Для получения информации отправьте e-mail.
+    Для получения информации отправьте e-mail.
 
-        Уровни репутации: low - низкий, medium - средний, hight - высокий
-        Значения: true - да , false - нет. 
+    Уровни репутации: low - низкий, medium - средний, hight - высокий
+    Значения: true - да , false - нет. 
 
-        Список команд:
-        /start - Начать
-        /help - Получить список команд
-        /time - Текущая дата и время
-        /about - Информация о боте
+    Список команд:
+    /start - Начать
+    /help - Получить список команд
+    /time - Текущая дата и время
+    /about - Информация о боте
     `);
 });
 
@@ -42,13 +42,13 @@ updates.hear(['/time', '/date'], async (context) => {
 
 updates.hear('/about', async (context) => {
     await context.send(`
-        ${info.name} - ${info.description}
+    ${info.name} - ${info.description}
 
-        Версия: ${info.version}
-        Разработчик: @rejson (Иван)
-        Платформа: Node JS.
-        Используемая библиотека: vk-io 
-        `);
+    Версия: ${info.version}
+    Разработчик: @rejson (Иван)
+    Платформа: Node JS.
+    Используемая библиотека: vk-io 
+    `);
 });
 
 updates.hear(
