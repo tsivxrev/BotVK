@@ -5,51 +5,13 @@ const utils = require('./modules/utils.js')
 const email = require('./modules/email.js')
 const info = require('./package.json')
 
+
 const vk = new VK ({
     token: config.TOKEN
 });
 
 const { updates } = vk;
 
-
-updates.hear(['/start', 'Начать'], async (context) => {
-    await context.send(`
-    С помощью данного бота можно узнать информацию о электронной почте!
-    Достаточно лишь отправить боту e-mail.
-
-    Введите /help для получения помощи.
-    `);
-});
-
-updates.hear('/help', async (context) => {
-    await context.send(`
-    Для получения информации отправьте e-mail.
-
-    Уровни репутации: low - низкий, medium - средний, hight - высокий
-    Значения: true - да , false - нет. 
-
-    Список команд:
-    /start - Начать
-    /help - Получить список команд
-    /time - Текущая дата и время
-    /about - Информация о боте
-    `);
-});
-
-updates.hear(['/time', '/date'], async (context) => {
-    await context.send(`Текущая дата и время: ${utils.getDateTime(utils.convertDateToUTC())} UTC`);
-});
-
-updates.hear('/about', async (context) => {
-    await context.send(`
-    ${info.name} - ${info.description}
-
-    Версия: ${info.version}
-    Разработчик: @rejson (Иван)
-    Платформа: Node JS.
-    Используемая библиотека: vk-io 
-    `);
-});
 
 updates.hear(
     {
@@ -71,7 +33,45 @@ updates.hear(
     }
 );
 
-updates.setHearFallbackHandler(async (context, next) => {
+updates.hear(['/start', 'Начать'], async (context) => {
+    await context.send(`
+        С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
+        
+        Введите /help для получения помощи.
+    `);
+});
+
+updates.hear('/help', async (context) => {
+    await context.send(`
+        Для получения информации отправьте e-mail.
+
+        Уровни репутации: low - низкий, medium - средний, hight - высокий
+        Значения: true - да , false - нет. 
+
+        Список команд:
+        /start - Начать
+        /help - Получить список команд
+        /time - Текущая дата и время
+        /about - Информация о боте
+    `);
+});
+
+updates.hear(['/time', '/date'], async (context) => {
+    await context.send(`Текущая дата и время: ${utils.getDateTime(utils.convertDateToUTC())} UTC`);
+});
+
+updates.hear('/about', async (context) => {
+    await context.send(`
+    ${info.name} - ${info.description}
+
+    Версия: ${info.version}
+    Разработчик: @rejson (Иван)
+    Платформа: Node JS.
+    Используемая библиотека: vk-io 
+    `);
+});
+
+updates.setHearFallbackHandler(async (context) => {
   await context.send(`${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки.' : 'такой команды нет'}`);
 });
 
