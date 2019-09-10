@@ -12,7 +12,7 @@ const vk = new VK ({
 const { updates } = vk;
 
 
-updates.hear(email.EMAIL_ADRESS_REGEXP, async (context) => {
+updates.hear(email.EMAIL_ADDRESS_REGEXP, async (context) => {
     try {
         await context.send(`${await email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
     } catch (error) {
@@ -20,7 +20,7 @@ updates.hear(email.EMAIL_ADRESS_REGEXP, async (context) => {
     }
 });
 
-updates.hear(email.EMAIL_ADRESS_REGEXP_RAW, async (context) => {
+updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     try {
         await context.send(`${ await utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
     } catch (error) {
