@@ -1,14 +1,17 @@
 var fetch = require('node-fetch')
 
 
-async function getDataFromAPI (url) {
+var getDataFromAPI = async (url) => {
     let response = await fetch(`${url}`)
-    let data = await response.json()
-    return await data;     
+    if (response.ok) {
+        let data = await response.json()
+        return await data;
+    }
+    throw new Error(response.status)
 }
 
-var toStringJSON = (data) => {
-    return JSON.stringify(data, null, '\t');
+var toStringJSON =  async (data) => {
+    return await JSON.stringify(data, null, '\t');
 }
 
 var getDateTime = (date) => {

@@ -5,7 +5,6 @@ const utils = require('./modules/utils.js')
 const email = require('./modules/email.js')
 const info = require('./package.json')
 
-
 const vk = new VK ({
     token: config.TOKEN
 });
@@ -13,25 +12,21 @@ const vk = new VK ({
 const { updates } = vk;
 
 
-updates.hear(
-    {
-        text : /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    },
-    async (context) => {
-        await context.send(`${email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
+updates.hear(email.EMAIL_ADRESS_REGEXP, async (context) => {
+    try {
+        await context.send(`${await email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
+    } catch (error) {
+        await context.send(String(`${error.name} - ${error.message}`))
     }
-);
+});
 
-updates.hear(
-    {
-        text : /^\/raw (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    },
-    async (context) => {
-        await context.send(
-            `${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}
-        `);
+updates.hear(email.EMAIL_ADRESS_REGEXP_RAW, async (context) => {
+    try {
+        await context.send(`${ await utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
+    } catch (error) {
+        await context.send(String(`${error.name} - ${error.message}`))
     }
-);
+});
 
 updates.hear(['/start', 'Начать'], async (context) => {
     await context.send(`
@@ -60,6 +55,10 @@ updates.hear(['/time', '/date'], async (context) => {
     await context.send(`Текущая дата и время: ${utils.getDateTime(utils.convertDateToUTC())} UTC`);
 });
 
+updates.hear(['/time_server', '/date_server'], async (context) => {
+    await context.send(String(new Date()));
+});
+
 updates.hear('/about', async (context) => {
     await context.send(`
     ${info.name} - ${info.description}
@@ -72,7 +71,7 @@ updates.hear('/about', async (context) => {
 });
 
 updates.setHearFallbackHandler(async (context) => {
-  await context.send(`${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки.' : 'такой команды нет'}`);
+    await context.send(`${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки.' : 'такой команды нет'}`);
 });
 
 
