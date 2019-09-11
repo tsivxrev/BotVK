@@ -7,6 +7,7 @@ var getDataFromAPI = async (url) => {
         let data = await response.json()
         return await data;
     }
+    
     throw new Error(response.status)
 }
 

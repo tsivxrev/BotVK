@@ -40,14 +40,13 @@ updates.hear('/help', async (context) => {
     await context.send(`
         Для получения информации отправьте e-mail.
 
-        Уровни репутации: low - низкий, medium - средний, hight - высокий
-        Значения: true - да , false - нет. 
-
         Список команд:
         /start - Начать
         /help - Получить список команд
         /time - Текущая дата и время
         /about - Информация о боте
+
+        Подробнее https://vk.com/@emailsbot-start
     `);
 });
 
