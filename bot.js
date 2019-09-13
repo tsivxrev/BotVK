@@ -58,6 +58,10 @@ updates.hear(['/time_server', '/date_server'], async (context) => {
     await context.send(String(new Date()));
 });
 
+updates.hear('/uptime', async (context) => {
+    await context.send(`Uptime: ${await utils.uptime()}`);
+});
+
 updates.hear('/about', async (context) => {
     await context.send(`
     ${info.name} - ${info.description}

@@ -15,6 +15,23 @@ var toStringJSON =  async (data) => {
     return await JSON.stringify(data, null, '\t');
 }
 
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0" + hours;}
+    if (minutes < 10) {minutes = "0" + minutes;}
+    if (seconds < 10) {seconds = "0" + seconds;}
+    var time    = hours + ':' + minutes +':' + seconds;
+    return time;
+}
+
+var uptime = async () => {
+    return await (process.uptime() + "").toHHMMSS();
+}
+
 var getDateTime = (date) => {
     var year = date.getFullYear();
     var month = ("0" + (date.getMonth() + 1)).substr(-2);
@@ -36,6 +53,7 @@ var convertDateToUTC = () => {
 module.exports = {
     getDateTime,
     convertDateToUTC,
+    uptime,
     getDataFromAPI,
     toStringJSON
 };
