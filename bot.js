@@ -64,7 +64,7 @@ updates.hear('/about', async (context) => {
 
     Версия: ${info.version}
     Разработчик: @rejson (Иван)
-    Платформа: Node JS.
+    Платформа: Node JS ${info.engines.node}.
     Используемая библиотека: vk-io 
     `);
 });
