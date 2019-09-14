@@ -62,6 +62,19 @@ updates.hear('/uptime', async (context) => {
     await context.send(`Uptime: ${await utils.uptime()}`);
 });
 
+updates.hear(
+    {
+        text:'/server',
+        senderId : [502046138]
+    }, 
+    async (context) => {
+    try{
+        await context.send(`${await utils.toStringJSON(await utils.getDataFromAPI(`http://ipinfo.io/json`))}`)
+    } catch (error){
+        await context.send(String(`${error.name} : ${error.message}`))
+    }
+});
+
 updates.hear('/about', async (context) => {
     await context.send(`
     ${info.name} - ${info.description}
