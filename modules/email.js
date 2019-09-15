@@ -7,7 +7,6 @@ const EMAIL_ADDRESS_REGEXP_RAW = /^\/raw (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\
 var emailInfoString = async (data) => {
 	if (typeof data != 'undefined') {
 		return await `
-		📧E-mail: ${data.email}
 		✅Уровень репутации e-mail: ${getLocalizationLevelString(data.reputation)}
 		⚠Должна ли почта рассматриваться как подозрительная: ${getLocalizationAnswerString(data.suspicious)}
 		📉Общее количество положительных и отрицательных источников репутации: ${data.references}
