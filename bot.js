@@ -28,7 +28,7 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     }
 });
 
-updates.hear(['/start', 'Начать'], async (context) => {
+updates.hear(['/start', /начать/i, /start/i], async (context) => {
     await context.send(`
         С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
         
