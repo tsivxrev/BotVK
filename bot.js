@@ -5,8 +5,9 @@ const utils = require('./modules/utils.js')
 const email = require('./modules/email.js')
 const info = require('./package.json')
 
+
 const vk = new VK ({
-    token: config.TOKEN
+    token: process.env.TOKEN
 });
 
 const { updates } = vk;
@@ -28,7 +29,7 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     }
 });
 
-updates.hear(['/start', /начать/i, /start/i], async (context) => {
+updates.hear([/start/i, /начать/i], async (context) => {
     await context.send(`
         С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
         
@@ -41,13 +42,19 @@ updates.hear('/help', async (context) => {
         Для получения информации отправьте e-mail.
 
         Список команд:
-        /start - Начать
+        /start - Нaчать
         /help - Получить список команд
         /time - Текущая дата и время
         /about - Информация о боте
 
         Подробнее https://vk.com/@emailsbot-start
     `);
+});
+
+updates.hear('/cat', async (context) => {
+    await Promise.all([
+        context.sendPhoto('https://loremflickr.com/1000/1000/')
+    ]);
 });
 
 updates.hear(['/time', '/date'], async (context) => {
@@ -58,7 +65,7 @@ updates.hear(['/time_server', '/date_server'], async (context) => {
     await context.send(String(new Date()));
 });
 
-updates.hear('/uptime', async (context) => {
+updates.hear(['/uptime', '/stat'], async (context) => {
     await context.send(`Uptime: ${await utils.uptime()}`);
 });
 
