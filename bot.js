@@ -5,9 +5,9 @@ const utils = require('./modules/utils.js')
 const email = require('./modules/email.js')
 const info = require('./package.json')
 
-
 const vk = new VK ({
-    token: process.env.TOKEN
+    token: process.env.TOKEN,
+    pollingGroupId: config.group_id
 });
 
 const { updates } = vk;
