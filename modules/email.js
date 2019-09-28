@@ -25,14 +25,14 @@ var emailInfoString = async (data) => {
 		🆓Использует ли почта бесплатный домен: ${getLocalizationAnswerString(data.details.free_provider)}
 		🆕Домен был создан меньше года назад: ${getLocalizationAnswerString(data.details.new_domain)}
 		⏰Дней с создания домена: ${data.details.days_since_domain_creation}
-		⚠Поддельный ли адрес электронной почты: ${getLocalizationAnswerString(data.details.spoofable)}
 		📅Электронная почта использует временный / одноразовый сервис: ${getLocalizationAnswerString(data.details.disposable)}
 
-		📋Достаточно строгая запись SPF для предотвращения подмены: ${getLocalizationAnswerString(data.details.spf_strict)}
+		📋Достаточно ли строгая запись SPF для предотвращения подмены: ${getLocalizationAnswerString(data.details.spf_strict)}
 		📋DMARC настроен правильно и применяется: ${getLocalizationAnswerString(data.details.dmarc_enforced)}
 		📋Имеет запись MX:  ${getLocalizationAnswerString(data.details.valid_mx)}
+		📋Может ли использоваться для спуфинга: ${getLocalizationAnswerString(data.details.spoofable)}
 
-		🌚Онлайн сервисы в которых замечено использование данной почты: ${data.details.profiles}
+		${ (Array.isArray(data.details.profiles) && data.details.profiles.length) ? `🌚Онлайн сервисы в которых замечено использование данной почты: ${data.details.profiles}` : ``}
 		`;
 	}
 	else {
@@ -54,7 +54,7 @@ var getLocalizationLevelString = (answer) => {
 	else if (answer === `high`) {
 		return `Высокий`;
 	}
-	else if  (answer === `none`) {
+	else if  (answer === `none` || answer === `n/a`) {
 		return `Неизвестен`
 	}
 	else {
