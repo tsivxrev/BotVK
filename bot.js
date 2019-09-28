@@ -5,6 +5,7 @@ const utils = require('./modules/utils.js')
 const email = require('./modules/email.js')
 const info = require('./package.json')
 
+
 const vk = new VK ({
     token: process.env.TOKEN,
     pollingGroupId: config.group_id
@@ -87,6 +88,7 @@ updates.hear('/about', async (context) => {
     ${info.name} - ${info.description}
 
     Версия: ${info.version}
+    Git: ${utils.getGitCommitHash()}
     Разработчик: @rejson (Иван)
     Платформа: Node JS ${info.engines.node}.
     Используемая библиотека: vk-io 

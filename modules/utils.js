@@ -1,4 +1,5 @@
 var fetch = require('node-fetch')
+const { execSync } = require("child_process"); 
 
 
 var getDataFromAPI = async (url) => {
@@ -13,6 +14,11 @@ var getDataFromAPI = async (url) => {
 
 var toStringJSON =  async (data) => {
     return await JSON.stringify(data, null, '\t');
+}
+
+var getGitCommitHash = () => {
+    gitCommand = `git rev-parse HEAD`;
+    return execSync(gitCommand).toString().trim();
 }
 
 String.prototype.toHHMMSS = function () {
@@ -55,5 +61,6 @@ module.exports = {
     convertDateToUTC,
     uptime,
     getDataFromAPI,
+    getGitLastCommitHash,
     toStringJSON
 };
