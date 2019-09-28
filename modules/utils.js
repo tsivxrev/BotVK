@@ -1,5 +1,5 @@
 var fetch = require('node-fetch')
-const { execSync } = require("child_process"); 
+const { execSync } = require("child_process")
 
 
 var getDataFromAPI = async (url) => {
@@ -61,6 +61,6 @@ module.exports = {
     convertDateToUTC,
     uptime,
     getDataFromAPI,
-    getGitLastCommitHash,
+    getGitCommitHash,
     toStringJSON
 };
