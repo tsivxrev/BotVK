@@ -30,7 +30,14 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     }
 });
 
-updates.hear(['/start', /начать/i], async (context) => {
+updates.setHearFallbackHandler(async (context) => {
+    if (!context.isChat) {
+        await context.send(`
+            ${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки. Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
+    }
+});
+
+updates.hear(['/start', /start/i, /начать/i], async (context) => {
     await context.send(`
         С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
         
@@ -38,7 +45,7 @@ updates.hear(['/start', /начать/i], async (context) => {
     `);
 });
 
-updates.hear('/help', async (context) => {
+updates.hear(['/help', /help/i, /помощь/i], async (context) => {
     await context.send(`
         Для получения информации отправьте e-mail.
 
@@ -94,9 +101,6 @@ updates.hear('/about', async (context) => {
     `);
 });
 
-updates.setHearFallbackHandler(async (context) => {
-    await context.send(`${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки.' : 'такой команды нет'}`);
-});
 
 
 updates.startPolling();
