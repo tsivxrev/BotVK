@@ -18,7 +18,10 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP, async (context) => {
     try {
         await context.send(`${await email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
     } catch (error) {
-        await context.send(String(`${error.name} : ${error.message}`))
+        await Promise.all([
+            await context.send(String(`${error.name} : ${error.message}`)),
+            console.log(error)
+        ]);
     }
 });
 
@@ -26,7 +29,10 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     try {
         await context.send(`${ await utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
     } catch (error) {
-        await context.send(String(`${error.name} : ${error.message}`))
+        await Promise.all([
+            context.send(String(`${error.name} : ${error.message}`)),
+            console.log(error)
+        ]);
     }
 });
 
@@ -86,7 +92,10 @@ updates.hear(
     try{
         await context.send(`${await utils.toStringJSON(await utils.getDataFromAPI(`http://ipinfo.io/json`))}`)
     } catch (error){
-        await context.send(String(`${error.name} : ${error.message}`))
+        await Promise.all([
+            context.send(String(`${error.name} : ${error.message}`)),
+            console.log(error)
+        ]);
     }
 });
 
@@ -100,7 +109,6 @@ updates.hear('/about', async (context) => {
     Используемая библиотека: vk-io 
     `);
 });
-
 
 
 updates.startPolling();
