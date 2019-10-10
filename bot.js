@@ -39,7 +39,7 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
 updates.setHearFallbackHandler(async (context) => {
     if (!context.isChat) {
         await context.send(`
-            ${config.is_explicit ? 'Нихуя ты обрыган, подставляй булки. Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
+            ${config.is_explicit ? 'Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
     }
 });
 
