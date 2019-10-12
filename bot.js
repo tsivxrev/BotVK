@@ -65,6 +65,14 @@ updates.hear(['/help', /help/i, /помощь/i], async (context) => {
     `);
 });
 
+updates.hear(/shrug/i, async (context) => {
+    await context.send(`¯\\_(ツ)_/¯`)
+});
+
+updates.hear([/пока/i, /Bye/i, /прощай/i, /до свидания/i], async (context) => {
+    await context.sendAudioMessage(`./assets/voices/bye.ogg`)
+});
+
 updates.hear('/cat', async (context) => {
     await Promise.all([
         context.sendPhoto('https://loremflickr.com/1000/1000/')
