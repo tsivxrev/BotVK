@@ -6,7 +6,8 @@
 
  ``` js
  {
-	"TOKEN": "", /* Токен сообщества (для запуска на локальном устройстве)*/
+ 	<!-- 10 строка в файле bot.js -->
+	"TOKEN": "", /* Токен сообщества (неохобходимо заменить код в bot.js с token: process.env.TOKEN, на token: config.TOKEN)*/
 	"group_id": "" /* ID - сообщества для использования GroupPolling */
 	"is_explicit": true
  }
