@@ -51,7 +51,7 @@ updates.hear(['/start', /start/i, /начать/i], async (context) => {
     `);
 });
 
-updates.hear(['/help', /help/i, /помощь/i], async (context) => {
+updates.hear(['/help', /помощь/i], async (context) => {
     await context.send(`
         Для получения информации отправьте e-mail.
 
@@ -67,10 +67,6 @@ updates.hear(['/help', /help/i, /помощь/i], async (context) => {
 
 updates.hear(/shrug/i, async (context) => {
     await context.send(`¯\\_(ツ)_/¯`)
-});
-
-updates.hear([/пока/i, /Bye/i, /прощай/i, /до свидания/i], async (context) => {
-    await context.sendAudioMessage(`./assets/voices/bye.ogg`)
 });
 
 updates.hear('/cat', async (context) => {
