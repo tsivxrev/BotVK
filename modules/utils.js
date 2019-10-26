@@ -21,17 +21,10 @@ var getGitCommitHash = () => {
     return execSync(gitCommand).toString().trim();
 }
 
-String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-    if (hours   < 10) {hours   = "0" + hours;}
-    if (minutes < 10) {minutes = "0" + minutes;}
-    if (seconds < 10) {seconds = "0" + seconds;}
-    var time    = hours + ':' + minutes +':' + seconds;
-    return time;
+declOfNum = (number, titles) => {
+    /* by FlyLnk13*/
+    number = Math.abs(number);
+    return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
 }
 
 var uptime = async () => {
@@ -55,6 +48,49 @@ var convertDateToUTC = () => {
     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 }
  
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0" + hours;}
+    if (minutes < 10) {minutes = "0" + minutes;}
+    if (seconds < 10) {seconds = "0" + seconds;}
+    var time    = hours + ':' + minutes +':' + seconds;
+    return time;
+}
+
+Date.prototype.DiffString = [
+    ["секунду", "* секунды", "* секунд"],
+    ["минуту", "* минуты", "* минут"],
+    ["час", "* часа", "* часов"],
+    ["день", "* дня", "* дней"],
+    ["год", "* года", "* лет"],
+    ["через *", "* назад", "прямо сейчас"]
+];
+
+Date.prototype.toDiffString = function (offset, lang) {
+    lang = lang || Date.prototype.DiffString;
+    offset = offset || [60, 3600, 86400, 31557600];
+    var now = Date.now();
+    var _this = this.getTime();
+    var diff = Math.floor(Math.abs(now - _this) / 1000);
+
+    var response = [];
+    for (var i = 0; i < offset.length; i++) {
+        response.push(diff % offset[i]);
+        if(i > 0) response[i] = Math.floor(response[i] / offset[i - 1]);
+        diff -= response[i];
+    }
+    response = response
+        .map((v, i) => declOfNum(v, lang[i]).replace("*", v))
+        .filter(v => v[0] !== "0")
+        .reverse();
+    if(!response.length) return lang[5][2];
+    return lang[5][(now > _this) * 1].replace("*", response.join(" "));
+};
+
 
 module.exports = {
     getDateTime,
