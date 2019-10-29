@@ -90,7 +90,7 @@ updates.hear(['/uptime', '/stat'], async (context) => {
 updates.hear(
     {
         text:'/server',
-        senderId : [502046138]
+        senderId : config.admins
     }, 
     async (context) => {
     try{
