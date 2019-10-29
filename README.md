@@ -8,7 +8,8 @@
  ``` js
  {
 	"TOKEN": "", /* Токен сообщества (неохобходимо заменить код в bot.js с token: process.env.TOKEN, на token: config.TOKEN)*/
-	"group_id": "" /* ID - сообщества для использования GroupPolling */
+	"group_id": "", /* ID - сообщества для использования GroupPolling */
+	"admins": [], /* Список ID администраторов */
 	"is_explicit": true
  }
  ```
