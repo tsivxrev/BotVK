@@ -21,7 +21,7 @@ var getGitCommitHash = () => {
     return execSync(gitCommand).toString().trim();
 }
 
-declOfNum = (number, titles) => {
+var declOfNum = (number, titles) => {
     /* by FlyLnk13*/
     number = Math.abs(number);
     return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
