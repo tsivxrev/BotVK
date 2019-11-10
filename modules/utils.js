@@ -16,8 +16,8 @@ var toStringJSON =  async (data) => {
     return await JSON.stringify(data, null, '\t');
 }
 
-var getGitCommitHash = () => {
-    gitCommand = `git rev-parse HEAD`;
+var getGitCommitHash = (long=true) => {
+    let gitCommand = `${long ? `git rev-parse HEAD` : `git rev-parse --short HEAD`}`;
     return execSync(gitCommand).toString().trim();
 }
 
