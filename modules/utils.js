@@ -1,30 +1,26 @@
-var fetch = require('node-fetch')
 const { execSync } = require("child_process")
+
+var fetch = require('node-fetch')
 
 
 var getDataFromAPI = async (url) => {
-    let response = await fetch(`${url}`)
+    let response = await fetch(url)
+    
     if (response.ok) {
-        let data = await response.json()
-        return await data;
+        let data = response.json()
+        return data;
     }
     
     throw new Error(response.status)
 }
 
-var toStringJSON =  async (data) => {
-    return await JSON.stringify(data, null, '\t');
+var toStringJSON = (data) => {
+    return JSON.stringify(data, null, '\t');
 }
 
 var getGitCommitHash = (long=true) => {
     let gitCommand = `${long ? `git rev-parse HEAD` : `git rev-parse --short HEAD`}`;
     return execSync(gitCommand).toString().trim();
-}
-
-var declOfNum = (number, titles) => {
-    /* by FlyLnk13*/
-    number = Math.abs(number);
-    return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
 }
 
 var uptime = async () => {
@@ -60,36 +56,6 @@ String.prototype.toHHMMSS = function () {
     var time    = hours + ':' + minutes +':' + seconds;
     return time;
 }
-
-Date.prototype.DiffString = [
-    ["секунду", "* секунды", "* секунд"],
-    ["минуту", "* минуты", "* минут"],
-    ["час", "* часа", "* часов"],
-    ["день", "* дня", "* дней"],
-    ["год", "* года", "* лет"],
-    ["через *", "* назад", "прямо сейчас"]
-];
-
-Date.prototype.toDiffString = function (offset, lang) {
-    lang = lang || Date.prototype.DiffString;
-    offset = offset || [60, 3600, 86400, 31557600];
-    var now = Date.now();
-    var _this = this.getTime();
-    var diff = Math.floor(Math.abs(now - _this) / 1000);
-
-    var response = [];
-    for (var i = 0; i < offset.length; i++) {
-        response.push(diff % offset[i]);
-        if(i > 0) response[i] = Math.floor(response[i] / offset[i - 1]);
-        diff -= response[i];
-    }
-    response = response
-        .map((v, i) => declOfNum(v, lang[i]).replace("*", v))
-        .filter(v => v[0] !== "0")
-        .reverse();
-    if(!response.length) return lang[5][2];
-    return lang[5][(now > _this) * 1].replace("*", response.join(" "));
-};
 
 
 module.exports = {

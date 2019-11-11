@@ -1,6 +1,6 @@
 {
   "name": "EmailBot",
-  "version": "1.3.3",
+  "version": "1.5.1",
   "description": "Бот для получения информации о e-mail",
   "main": "bot.js",
   "scripts": {
@@ -21,6 +21,6 @@
   "author": "Ivan",
   "license": "ISC",
   "dependencies": {
-    "vk-io": "^4.0.0-rc.20"
+    "vk-io": "^4.0.0-rc.26"
   }
 }

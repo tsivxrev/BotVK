@@ -27,7 +27,7 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP, async (context) => {
 
 updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     try {
-        await context.send(`${ await utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
+        await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
     } catch (error) {
         await Promise.all([
             context.send(String(`${error.name} : ${error.message}`)),
@@ -94,7 +94,7 @@ updates.hear(
     }, 
     async (context) => {
     try{
-        await context.send(`${await utils.toStringJSON(await utils.getDataFromAPI(`http://ipinfo.io/json`))}`)
+        await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`http://ipinfo.io/json`))}`)
     } catch (error){
         await Promise.all([
             context.send(String(`${error.name} : ${error.message}`)),
