@@ -37,10 +37,11 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
 });
 
 updates.setHearFallbackHandler(async (context) => {
-    if (!context.isChat) {
-        await context.send(`
-            ${config.is_explicit ? 'Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
+    if (context.isChat) {
+        return;
     }
+    
+    await context.send(`${config.is_explicit ? 'Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
 });
 
 updates.hear(['/start', /start/i, /начать/i], async (context) => {
@@ -115,5 +116,4 @@ updates.hear('/about', async (context) => {
 });
 
 
-updates.startPolling();
-updates.start().catch(console.error);
+updates.startPolling().catch(console.error);
