@@ -36,14 +36,6 @@ updates.hear(email.EMAIL_ADDRESS_REGEXP_RAW, async (context) => {
     }
 });
 
-updates.setHearFallbackHandler(async (context) => {
-    if (context.isChat) {
-        return;
-    }
-    
-    await context.send(`${config.is_explicit ? 'Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
-});
-
 updates.hear(['/start', /start/i, /начать/i], async (context) => {
     await context.send(`
         С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
@@ -113,6 +105,14 @@ updates.hear('/about', async (context) => {
     Платформа: Node JS ${info.engines.node}.
     Используемая библиотека: vk-io 
     `);
+});
+
+updates.setHearFallbackHandler(async (context) => {
+    if (context.isChat) {
+        return;
+    }
+    
+    await context.send(`${config.is_explicit ? 'Введите /help для получения помощи' : 'Такой команды нет. Введите /help для получения помощи'}`);
 });
 
 
