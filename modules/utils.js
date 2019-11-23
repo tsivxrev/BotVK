@@ -23,7 +23,7 @@ let getGitCommitHash = (long=true) => {
         let gitCommand = long ? `git rev-parse HEAD` : `git rev-parse --short HEAD`;
         return execSync(gitCommand).toString().trim();
     } catch (ignore) {
-        return `Error get hash of last commit :(`;
+        return `Something went wrong while parsing git-hash :(`;
     }
 }
 
