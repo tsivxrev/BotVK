@@ -1,9 +1,9 @@
 const { VK } = require('vk-io');
 
 const config = require('./config.json');
-const utils = require('./modules/utils.js')
-const email = require('./modules/email.js')
-const info = require('./package.json')
+const utils = require('./modules/utils.js');
+const email = require('./modules/email.js');
+const info = require('./package.json');
 
 
 const vk = new VK ({
@@ -16,7 +16,7 @@ const { updates } = vk;
 
 updates.hear(email.EMAIL_ADDRESS_REGEXP, async (context) => {
     try {
-        await context.send(`${await email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
+        await context.send(`${email.emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
     } catch (error) {
         await Promise.all([
             await context.send(String(`${error.name} : ${error.message}`)),
@@ -77,7 +77,7 @@ updates.hear(['/time_server', '/date_server'], async (context) => {
 });
 
 updates.hear(['/uptime', '/stat'], async (context) => {
-    await context.send(`Uptime: ${await utils.uptime()}`);
+    await context.send(`Uptime: ${utils.uptime()}`);
 });
 
 updates.hear(
@@ -101,6 +101,7 @@ updates.hear('/about', async (context) => {
     ${info.name} - ${info.description}
 
     Версия: ${info.version}
+    Git: ${utils.getGitCommitHash(false)}
     Разработчик: @rejson (Иван)
     Платформа: Node JS ${info.engines.node}.
     Используемая библиотека: vk-io 

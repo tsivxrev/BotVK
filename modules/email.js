@@ -1,12 +1,12 @@
-const utils = require('./utils.js')
+const utils = require('./utils.js');
 
 
 const EMAIL_ADDRESS_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const EMAIL_ADDRESS_REGEXP_RAW = /^\/raw (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-var emailInfoString = async (data) => {
+let emailInfoString = (data) => {
 	if (typeof data != 'undefined') {
-		return await `
+		return `
 		✅Уровень репутации e-mail: ${getLocalizationLevelString(data.reputation)}
 		⚠Должна ли почта рассматриваться как подозрительная: ${getLocalizationAnswerString(data.suspicious)}
 		📉Общее количество положительных и отрицательных источников репутации: ${data.references}
@@ -36,15 +36,15 @@ var emailInfoString = async (data) => {
 		`;
 	}
 	else {
-		throw new Error(`Can not parsed data.`)
+		throw new Error(`Error parsed data :(`)
 	}
 }
 
-var getLocalizationAnswerString = (answer) => {
+let getLocalizationAnswerString = (answer) => {
 	return answer ? `Да` : `Нет`
 }
 
-var getLocalizationLevelString = (answer) => {
+let getLocalizationLevelString = (answer) => {
 	if (answer === `low`) {
 		return `Низкий`; 
 	}
