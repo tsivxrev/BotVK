@@ -1,8 +1,4 @@
-const utils = require('./utils.js');
-
-
-const EMAIL_ADDRESS_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const EMAIL_ADDRESS_REGEXP_RAW = /^\/raw (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const utils = require('../utils.js');
 
 let emailInfoString = (data) => {
 	if (typeof data != 'undefined') {
@@ -62,9 +58,36 @@ let getLocalizationLevelString = (answer) => {
 	}
 }
 
+const clean = async(context) => {
+	try {
+        await context.send(`${emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
+    } catch (error) {
+        await Promise.all([
+            await context.send(String(`${error.name} : ${error.message}`)),
+            console.log(error)
+        ]);
+    }
+}
 
-module.exports = {
-	emailInfoString, 
-	EMAIL_ADDRESS_REGEXP,
-	EMAIL_ADDRESS_REGEXP_RAW
-};
+const raw = async(context) => {
+	try {
+        await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
+    } catch (error) {
+        await Promise.all([
+            context.send(String(`${error.name} : ${error.message}`)),
+            console.log(error)
+        ]);
+    }
+}
+
+
+module.exports = [
+	{
+		cmd: /^\/raw (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		execute: raw
+	},
+	{
+		cmd: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		execute: clean
+	}
+];

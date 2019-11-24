@@ -21,6 +21,8 @@
   "author": "Ivan",
   "license": "ISC",
   "dependencies": {
-    "vk-io": "^4.0.0-rc.26"
+    "child_process": "^1.0.2",
+    "node-fetch": "^2.6.0",
+    "vk-io": "^4.0.0-rc.29"
   }
 }
