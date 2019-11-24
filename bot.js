@@ -22,9 +22,16 @@ const { updates } = vk;
 
 console.log("[i] Modules initialization...")
 
-let hearList = fs.readdirSync("./modules/hear")
-let onList = fs.readdirSync("./modules/on")
-let useList = fs.readdirSync("./modules/use")
+let hearList = undefined
+let onList = undefined
+let useList = undefined
+
+if(fs.existsSync("./modules/hear"))
+    hearList = fs.readdirSync("./modules/hear")
+if(fs.existsSync("./modules/on"))
+    onList = fs.readdirSync("./modules/on")
+if(fs.existsSync("./modules/use"))
+    useList = fs.readdirSync("./modules/use")
 
 let readModule = (fname) => {
     if (!fname.endsWith(".js")) return undefined;
@@ -34,12 +41,14 @@ let readModule = (fname) => {
 }
 
 let parseModule = (list, dir, fun) => {
-    for(let moduleFile of list) {
-        let module = readModule(`./modules/${dir}/${moduleFile}`)
-        if(module != undefined) {
-            module.forEach((modulePart) => {
-                fun(modulePart)
-            })
+    if(list != undefined) {
+        for(let moduleFile of list) {
+            let module = readModule(`./modules/${dir}/${moduleFile}`)
+            if(module != undefined) {
+                module.forEach((modulePart) => {
+                    fun(modulePart)
+                })
+            }
         }
     }
 }
