@@ -1,37 +1,26 @@
 const { VK } = require('vk-io');
+
 const fs = require('fs');
-
 const config = require('./config.json');
+const utils = require('./utils.js');
 
-let vk = null
 
-if(config.TOKEN == "") {
-    vk = new VK ({
-        token: process.env.TOKEN,
-        pollingGroupId: config.group_id
-    });
-}
-else {
-    vk = new VK ({
-        token: config.TOKEN,
-        pollingGroupId: config.group_id
-    });
-}
+const vk = new VK ({
+    token: utils.isEmptyString(process.env.TOKEN) ? config.TOKEN : process.env.TOKEN,
+    pollingGroupId: config.group_id
+});
 
 const { updates } = vk;
 
-console.log("[i] Modules initialization...")
 
-let hearList = undefined
-let onList = undefined
-let useList = undefined
+console.log("[i] Modules initialization...");
 
-if(fs.existsSync("./modules/hear"))
-    hearList = fs.readdirSync("./modules/hear")
-if(fs.existsSync("./modules/on"))
-    onList = fs.readdirSync("./modules/on")
-if(fs.existsSync("./modules/use"))
-    useList = fs.readdirSync("./modules/use")
+let hearList, onList, useList;
+
+if (fs.existsSync("./modules/hear")) hearList = fs.readdirSync("./modules/hear")
+if (fs.existsSync("./modules/on")) onList = fs.readdirSync("./modules/on")
+if (fs.existsSync("./modules/use")) useList = fs.readdirSync("./modules/use")
+
 
 let readModule = (fname) => {
     if (!fname.endsWith(".js")) return undefined;
@@ -53,6 +42,7 @@ let parseModule = (list, dir, fun) => {
     }
 }
 
+
 parseModule(hearList, "hear", (modulePart) => { updates.hear(modulePart.hear, modulePart.execute) })
 parseModule(onList, "on", (modulePart) => { updates.on(modulePart.on, modulePart.execute) })
 parseModule(useList, "use", (modulePart) => { updates.use(modulePart.use, modulePart.execute) })
@@ -64,4 +54,4 @@ updates.setHearFallbackHandler(async (context) => {
 });
 
 console.log("[i] All modules successfully loaded. Starting bot...")
-updates.startPolling().catch(console.error);
+updates.startPolling().then(console.log(`Bot started.`)).catch(console.error);

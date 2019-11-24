@@ -31,6 +31,14 @@ let uptime = () => {
     return (process.uptime() + "").toHHMMSS();
 }
 
+let isEmptyString = (str) => {
+    if (str) {
+        return false;
+    }
+    
+    return true;
+}
+
 let getDateTime = (date) => {
     let year = date.getFullYear();
     let month = ("0" + (date.getMonth() + 1)).substr(-2);
@@ -68,5 +76,6 @@ module.exports = {
     uptime,
     getDataFromAPI,
     getGitCommitHash,
-    toStringJSON
+    toStringJSON,
+    isEmptyString
 };
