@@ -14,8 +14,7 @@ const server = async(context) => {
 
 module.exports = [
     {
-        hear: '/server',
-        senderId: config.admins,
+        hear: { text: '/server', senderId: config.admins},
         execute: server
     }
 ]
