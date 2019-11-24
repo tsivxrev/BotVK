@@ -28,14 +28,17 @@ for (let file of files) {
         let module = require(`./modules/${file}`)
         console.log(`[i]\t[+] Loading ${file.replace(".js", "")} module`)
         module.forEach((modulePart) => {
-            if(modulePart.senderId == undefined) {
-                updates.hear(modulePart.cmd, modulePart.execute)
-            }
-            else {
+            if(modulePart.senderId != undefined) {
                 updates.hear({
                     text: modulePart.cmd,
                     senderId : modulePart.senderId
                 }, modulePart.execute)
+            }
+            else if(modulePart.on != undefined) {
+                updates.on(modulePart.on, modulePart.execute)
+            }
+            else {
+                updates.hear(modulePart.cmd, modulePart.execute)
             }
         })
     }
