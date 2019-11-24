@@ -25,7 +25,7 @@ if (fs.existsSync("./modules/use")) useList = fs.readdirSync("./modules/use")
 let readModule = (fname) => {
     if (!fname.endsWith(".js")) return undefined;
     let ret = require(fname)
-    console.log(`[i]\t[+] Loading ${fname.split("/")[3].replace(".js", "")} module with ${ret.length} handlers`)
+    console.log(`[i]\t[+] Loading '${fname.split("/")[3].replace(".js", "")}' module with ${ret.length} handlers`)
     return ret;
 }
 
@@ -54,4 +54,6 @@ updates.setHearFallbackHandler(async (context) => {
 });
 
 console.log("[i] All modules successfully loaded. Starting bot...")
-updates.startPolling().then(console.log(`Bot started.`)).catch(console.error);
+
+
+updates.startPolling().then(console.log(`[i] Bot successfully started :)`)).catch(console.error);
