@@ -22,27 +22,32 @@ const { updates } = vk;
 
 console.log("[i] Modules initialization...")
 
-let files = fs.readdirSync("./modules")
-for (let file of files) {
-    if (file.endsWith(".js")) {
-        let module = require(`./modules/${file}`)
-        console.log(`[i]\t[+] Loading ${file.replace(".js", "")} module`)
-        module.forEach((modulePart) => {
-            if(modulePart.senderId != undefined) {
-                updates.hear({
-                    text: modulePart.cmd,
-                    senderId : modulePart.senderId
-                }, modulePart.execute)
-            }
-            else if(modulePart.on != undefined) {
-                updates.on(modulePart.on, modulePart.execute)
-            }
-            else {
-                updates.hear(modulePart.cmd, modulePart.execute)
-            }
-        })
+let hearList = fs.readdirSync("./modules/hear")
+let onList = fs.readdirSync("./modules/on")
+let useList = fs.readdirSync("./modules/use")
+
+let readModule = (fname) => {
+    if (!fname.endsWith(".js")) return undefined;
+    let ret = require(fname)
+    console.log(`[i]\t[+] Loading ${fname.split("/")[3].replace(".js", "")} module with ${ret.length} handlers`)
+    return ret;
+}
+
+let parseModule = (list, dir, fun) => {
+    for(let moduleFile of list) {
+        let module = readModule(`./modules/${dir}/${moduleFile}`)
+        if(module != undefined) {
+            module.forEach((modulePart) => {
+                fun(modulePart)
+            })
+        }
     }
 }
+
+parseModule(hearList, "hear", (modulePart) => { updates.hear({ text: modulePart.hear, senderId: modulePart.senderId}, modulePart.execute) })
+parseModule(onList, "on", (modulePart) => { updates.on(modulePart.on, modulePart.execute) })
+parseModule(useList, "use", (modulePart) => { updates.use(modulePart.use, modulePart.execute) })
+
 
 updates.setHearFallbackHandler(async (context) => {
     if (context.isChat) return;

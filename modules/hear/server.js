@@ -1,5 +1,5 @@
-const config = require('../config.json');
-const utils = require('../utils.js');
+const config = require('../../config.json');
+const utils = require('../../utils.js');
 
 const server = async(context) => {
     try{
@@ -14,7 +14,7 @@ const server = async(context) => {
 
 module.exports = [
     {
-        cmd: '/server',
+        hear: '/server',
         senderId: config.admins,
         execute: server
     }

@@ -7,7 +7,7 @@ const cat = async(context) => {
 
 module.exports = [
     {
-        cmd: '/cat',
+        hear: '/cat',
         execute: cat
     }
 ]

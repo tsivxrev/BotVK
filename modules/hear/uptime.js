@@ -1,4 +1,4 @@
-const utils = require('../utils.js');
+const utils = require('../../utils.js');
 
 const uptime = async(context) => {
     await context.send(`Uptime: ${utils.uptime()}`);
@@ -6,7 +6,7 @@ const uptime = async(context) => {
 
 module.exports = [
     {
-        cmd: ['/uptime', '/stat'],
+        hear: ['/uptime', '/stat'],
         execute: uptime
     }
 ]

@@ -1,4 +1,4 @@
-const utils = require('../utils.js');
+const utils = require('../../utils.js');
 
 const dt = async(context) => {
     await context.send(`Текущая дата и время: ${utils.getDateTime(utils.convertDateToUTC())} UTC`);
@@ -10,11 +10,11 @@ const server_dt = async(context) => {
 
 module.exports = [
     {
-        cmd: ['/time', '/date'],
+        hear: ['/time', '/date'],
         execute: dt
     },
     {
-        cmd: ['/time_server', '/date_server'],
+        hear: ['/time_server', '/date_server'],
         execute: server_dt
     }
 ]

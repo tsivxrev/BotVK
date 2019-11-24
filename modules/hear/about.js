@@ -1,5 +1,5 @@
-const info = require('../package.json');
-const utils = require('../utils.js');
+const info = require('../../package.json');
+const utils = require('../../utils.js');
 
 const about = async(context) => {
     await context.send(`
@@ -14,7 +14,7 @@ const about = async(context) => {
 
 module.exports = [
     {
-        cmd: '/about',
+        hear: '/about',
         execute: about
     }
 ]

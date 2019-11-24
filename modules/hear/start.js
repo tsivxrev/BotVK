@@ -10,7 +10,7 @@ const start = async(context) => {
 
 module.exports = [
 	{
-		cmd: ['/start', /start/i, /начать/i],
+		hear: ['/start', /start/i, /начать/i],
 		execute: start
 	}
 ];

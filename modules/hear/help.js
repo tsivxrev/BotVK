@@ -16,7 +16,7 @@ const help = async(context) => {
 
 module.exports = [
     {
-        cmd: ['/help', /помощь/i],
+        hear: ['/help', /помощь/i],
         execute: help
     }
 ]
