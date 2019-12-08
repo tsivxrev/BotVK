@@ -51,7 +51,7 @@ let getDateTime = (date) => {
 }
 
 let convertDateToUTC = () => {
-    var date = new Date();
+    let date = new Date();
     date.toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}) 
     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
 }
