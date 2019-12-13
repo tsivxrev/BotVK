@@ -61,7 +61,7 @@ let getLocalizationLevelString = (answer) => {
 	}
 }
 
-const clean = async(context) => {
+const clean = async(context, vk) => {
 	try {
         await context.send(`${emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
     } catch (error) {
@@ -72,7 +72,7 @@ const clean = async(context) => {
     }
 }
 
-const raw = async(context) => {
+const raw = async(context, vk) => {
 	try {
         await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
     } catch (error) {

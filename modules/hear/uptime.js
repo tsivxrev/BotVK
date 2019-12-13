@@ -1,6 +1,6 @@
 const utils = require('../../utils.js');
 
-const uptime = async(context) => {
+const uptime = async(context, vk) => {
     await context.send(`Uptime: ${utils.uptime()}`);
 }
 

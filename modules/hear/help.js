@@ -1,5 +1,5 @@
 
-const help = async(context) => {
+const help = async(context, vk) => {
     await context.send(`
         Для получения информации отправьте e-mail.
 

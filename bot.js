@@ -43,9 +43,15 @@ let parseModule = (list, dir, fun) => {
 }
 
 
-parseModule(hearList, "hear", (modulePart) => { updates.hear(modulePart.hear, modulePart.execute) })
-parseModule(onList, "on", (modulePart) => { updates.on(modulePart.on, modulePart.execute) })
-parseModule(useList, "use", (modulePart) => { updates.use(modulePart.use, modulePart.execute) })
+parseModule(hearList, "hear", (modulePart) => { 
+    updates.hear(modulePart.hear, (context) => modulePart.execute(context, vk)) 
+})
+parseModule(onList, "on", (modulePart) => { 
+    updates.on(modulePart.on, (context) => modulePart.execute(context, vk)) 
+})
+parseModule(useList, "use", (modulePart) => { 
+    updates.use(modulePart.use, (context) => modulePart.execute(context, vk)) 
+})
 
 
 updates.setHearFallbackHandler(async (context) => {

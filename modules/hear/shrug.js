@@ -1,5 +1,5 @@
 
-const shrug = async(context) => {
+const shrug = async(context ,vk) => {
     await context.send(`¯\\_(ツ)_/¯`)
 }
 

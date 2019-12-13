@@ -1,4 +1,4 @@
-const cat = async(context) => {
+const cat = async(context, vk) => {
     await Promise.all([
         context.sendPhoto('https://loremflickr.com/1000/1000/')
     ]);
