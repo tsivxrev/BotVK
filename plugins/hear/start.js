@@ -9,7 +9,7 @@ const start = async(context, vk) => {
 
 module.exports = [
 	{
-		hear: ['/start', /start/i, /начать/i],
+		hear: [/^(старт|бот|\?|start)$/i],
 		execute: start
 	}
 ];
