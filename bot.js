@@ -46,7 +46,6 @@ fileToExport.forEach((pluginPart) => {
     } 
 })
 
-
 updates.setHearFallbackHandler(async (context) => {
     if (context.isChat) return;
     await context.send(`Введите /help для получения помощи`);
