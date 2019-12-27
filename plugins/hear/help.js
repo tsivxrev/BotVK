@@ -16,7 +16,7 @@ const help = async(context, vk) => {
 
 module.exports = [
     {
-        hear: [/^(справка|привет|бот|\?|help)$/i],
+        hear: [/^(справка|помощь|бот|\?|help)$/i, "/help"],
         execute: help
     }
 ]
