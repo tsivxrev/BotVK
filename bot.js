@@ -16,33 +16,33 @@ const { updates } = vk;
 
 console.log("[] Initing plugins...");
 
-let hearPluginsFolder = fs.readdirSync("./plugins/hear");
-let hearFileToExport = [];
+let pluginsFolder = fs.readdirSync("./plugins/hear");
+let fileToExport = [];
 
-for (let item of hearPluginsFolder) {
+for (let item of pluginsFolder) {
     if (item.endsWith(".js")) {
-        hearFileToExport.push(`./plugins/hear/${item}`);
+        fileToExport.push(`./plugins/hear/${item}`);
         continue;
     }
 }
 
 console.log("[] Load plugins...");
 
-hearFileToExport.forEach((pluginPart) => {
+fileToExport.forEach((pluginPart) => {
 
-    let command = require(pluginPart);
-
-    console.log(`[] Loading '${pluginPart}' plugin with ${command.length} command(s)`)
-    
     try {
+        let command = require(pluginPart);
+
+        console.log(`[] Loading '${pluginPart}' plugin with ${command.length} command(s)`)
+        
         helpers.loadCommand(command, (modulePart) => { 
             updates.hear(modulePart.hear, (context) => modulePart.execute(context, vk))
         })
 
     } catch (e) {
         console.log("Error occurred while loading plugin commands!");
-        console.log(pluginPath);
-        console.log(e);
+        console.log(pluginPart);
+        console.log(e)
     } 
 })
 
