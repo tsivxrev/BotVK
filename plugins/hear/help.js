@@ -16,7 +16,14 @@ const help = async(context, vk) => {
 
 module.exports = [
     {
-        hear: [/^(справка|помощь|бот|\?|help)$/i, "/help"],
+        hear: [/^(справка|помощь|бот|help)$/i, "/help"],
+        execute: help
+    },
+    {
+        hear: {
+            text: [/^(справка|помощь|\?|бот|help)$/i],
+            isChat: false
+        },
         execute: help
     }
 ]
