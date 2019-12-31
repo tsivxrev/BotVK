@@ -42,7 +42,6 @@ fileToExport.forEach((pluginPart) => {
     } catch (e) {
         console.log("Error occurred while loading plugin commands!");
         console.log(pluginPart);
-        console.log(e)
     } 
 })
 
