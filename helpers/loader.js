@@ -20,5 +20,5 @@ let commandReceived = (fileToExport, func) => {
 
 
 module.exports = {
-    commandReceived
+  commandReceived
 };
