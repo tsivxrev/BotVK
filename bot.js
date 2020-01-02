@@ -16,35 +16,35 @@ const { updates } = vk;
 
 console.log("[] Initing plugins...");
 
-let pluginsFolder = fs.readdirSync("./plugins/hear");
-let fileToExport = [];
+let pluginsHearFolder = fs.readdirSync("./plugins/hear");
+let pluginsOnFolder = fs.readdirSync("./plugins/on");
+let fileToExportHear = [];
+let fileToExportOn = [];
 
-for (let item of pluginsFolder) {
+for (let item of pluginsHearFolder) {
     if (item.endsWith(".js")) {
-        fileToExport.push(`./plugins/hear/${item}`);
+        fileToExportHear.push(`./plugins/hear/${item}`);
+        continue;
+    }
+}
+
+for (let item of pluginsOnFolder) {
+    if (item.endsWith(".js")) {
+        fileToExportOn.push(`./plugins/on/${item}`);
         continue;
     }
 }
 
 console.log("[] Load plugins...");
 
-fileToExport.forEach((pluginPart) => {
-
-    try {
-        let command = require(pluginPart);
-
-        console.log(`[] Loading '${pluginPart}' plugin with ${command.length} command(s)`)
-        
-        helpers.loadCommand(command, (modulePart) => { 
-            updates.hear(modulePart.hear, (context) => modulePart.execute(context, vk))
-        })
-
-    } catch (e) {
-        console.log("Error occurred while loading plugin commands!");
-        console.log(pluginPart);
-        console.log(e)
-    } 
+helpers.commandReceived(fileToExportOn, (modulePart) => { 
+    updates.on(modulePart.type, (context) => modulePart.execute(context, vk))
 })
+
+helpers.commandReceived(fileToExportHear, (modulePart) => { 
+    updates.hear(modulePart.hear, (context) => modulePart.execute(context, vk))
+})
+
 
 updates.setHearFallbackHandler(async (context) => {
     if (context.isChat) return;
