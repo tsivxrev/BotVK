@@ -6,5 +6,5 @@ let loadCommand = (command, func) => {
 
 
 module.exports = {
-	loadCommand
-}; 
+    loadCommand
+};
