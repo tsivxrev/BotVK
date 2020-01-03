@@ -15,7 +15,7 @@ let parsedData = (data) => {
 
 const sticker = async (context , next) => {
     
-    if (context.hasReplyMessage) {        
+    if (context.hasReplyMessage) {
         context.loadMessagePayload()
         const replyMessage = context.replyMessage.getAttachments('sticker');
 
