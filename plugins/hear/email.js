@@ -63,6 +63,10 @@ let getLocalizationLevelString = (answer) => {
 
 const clean = async (context, vk) => {
 	try {
+		if (true) {
+			await context.send(`Отключено :(`);
+			return;
+		}
 		await context.send(`${emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
 	} catch (error) {
 		await Promise.all([
