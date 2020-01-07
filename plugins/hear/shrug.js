@@ -5,7 +5,7 @@ const shrug = async (context ,vk) => {
 
 module.exports = [
     {
-        hear: /shrug/i,
+        hear: [/(шруг|shrug)/i, '/shrug'],
         execute: shrug
     }
 ]

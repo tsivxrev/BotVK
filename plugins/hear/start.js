@@ -1,4 +1,5 @@
-const start = async (context, vk) => {
+
+const start = async(context, vk) => {
 	await context.send(`
 		С помощью данного бота можно узнать информацию о электронной почте! Достаточно лишь отправить боту e-mail.
 		

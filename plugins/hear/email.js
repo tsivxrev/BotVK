@@ -63,24 +63,24 @@ let getLocalizationLevelString = (answer) => {
 
 const clean = async (context, vk) => {
 	try {
-        await context.send(`${emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
-    } catch (error) {
-        await Promise.all([
-            await context.send(String(`${error.name} : ${error.message}`)),
-            console.log(error)
-        ]);
-    }
+		await context.send(`${emailInfoString(await utils.getDataFromAPI(`https://emailrep.io/${context.text}`))}`)
+	} catch (error) {
+		await Promise.all([
+			await context.send(String(`${error.name} : ${error.message}`)),
+			console.log(error)
+		]);
+	}
 }
 
 const raw = async (context, vk) => {
 	try {
-        await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
-    } catch (error) {
-        await Promise.all([
-            context.send(String(`${error.name} : ${error.message}`)),
-            console.log(error)
-        ]);
-    }
+		await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`https://emailrep.io/${context.text.replace('/raw', '').replace(' ', '')}`))}`);
+	} catch (error) {
+		await Promise.all([
+			context.send(String(`${error.name} : ${error.message}`)),
+			console.log(error)
+		]);
+	}
 }
 
 
