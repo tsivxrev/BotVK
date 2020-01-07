@@ -1,7 +1,7 @@
 const config = require('../../config.json');
 const utils = require('../../utils.js');
 
-const server = async(context) => {
+const server = async (context) => {
     try{
         await context.send(`${utils.toStringJSON(await utils.getDataFromAPI(`http://ipinfo.io/json`))}`)
     } catch (error){
