@@ -37,14 +37,13 @@ for (let item of pluginsOnFolder) {
 
 console.log("[] Load plugins...");
 
-helpers.commandReceived(fileToExportOn, (modulePart) => { 
+helpers.commandOnReceived(fileToExportOn, (modulePart) => { 
     updates.on(modulePart.type, (context) => modulePart.execute(context, vk))
 })
 
-helpers.commandReceived(fileToExportHear, (modulePart) => { 
+helpers.commandOnReceived(fileToExportHear, (modulePart) => { 
     updates.hear(modulePart.hear, (context) => modulePart.execute(context, vk))
 })
-
 
 updates.setHearFallbackHandler(async (context) => {
     if (context.isChat) return;
