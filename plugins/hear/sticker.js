@@ -6,6 +6,7 @@ let parsedData = (data) => {
         parsed.push(`ID продукта: ${r['productId']}`)
         parsed.push(``)
         parsed.push(`Ссылки на изображения стикера в разных размерах:`)
+        parsed.push(``)
         r['images'].forEach((size) => {
             parsed.push(`${size.width}x${size.height} : ${size.url}`)
         })
