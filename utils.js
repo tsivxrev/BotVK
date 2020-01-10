@@ -31,14 +31,6 @@ let uptime = () => {
     return (process.uptime() + "").toHHMMSS();
 }
 
-let isEmptyString = (str) => {
-    if (str) {
-        return false;
-    }
-    
-    return true;
-}
-
 let convertTime = (dateTimeISO) => {
     let d = new Date(dateTimeISO);
     
