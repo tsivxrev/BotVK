@@ -81,6 +81,5 @@ module.exports = {
     uptime,
     getDataFromAPI,
     getGitCommitHash,
-    toStringJSON,
-    isEmptyString
+    toStringJSON
 };
