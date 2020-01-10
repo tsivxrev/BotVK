@@ -7,7 +7,7 @@ const helpers = require('./helpers/loader.js')
 
 
 const vk = new VK ({
-    token: utils.isEmptyString(process.env.TOKEN) ? config.TOKEN : process.env.TOKEN,
+    token: process.env.TOKEN || config.TOKEN,
     pollingGroupId: config.group_id
 });
 
