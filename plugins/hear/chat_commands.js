@@ -1,4 +1,5 @@
 const mInfo = async (context) => {
+    context.loadMessagePayload()
 	await context.reply(JSON.stringify(context, null, '\t'));
 }
 
