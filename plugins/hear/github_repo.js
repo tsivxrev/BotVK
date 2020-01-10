@@ -14,10 +14,10 @@ const getGitHubRepo = async (context, vk) => {
 }
 
 let getDataFromAPI = async (url) => {
-    let response = await fetch(url);
-    
-    let data = response.json();
-   	return data;
+	let response = await fetch(url);
+	
+	let data = response.json();
+	return data;
 }
 
 let toHumanReadingData = (data) => {
@@ -55,6 +55,6 @@ let toHumanReadingData = (data) => {
 module.exports = [
 	{
 		hear: GITHUB_REPO_REGEXP,
-		execute: getGitHubRepo	
+		execute: getGitHubRepo  
 	}
 ]
