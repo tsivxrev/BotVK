@@ -2,12 +2,11 @@ const { VK } = require('vk-io');
 
 const fs = require('fs');
 const config = require('./config.json');
-const utils = require('./utils.js');
 const helpers = require('./helpers/loader.js')
 
 
 const vk = new VK ({
-    token: utils.isEmptyString(process.env.TOKEN) ? config.TOKEN : process.env.TOKEN,
+    token: process.env.TOKEN || config.TOKEN,
     pollingGroupId: config.group_id
 });
 

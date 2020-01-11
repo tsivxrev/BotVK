@@ -1,11 +1,11 @@
 const utils = require('../../utils.js');
 
 const dt = async (context, vk) => {
-    await context.send(`Текущая дата и время: ${utils.getDateTime(utils.convertDateToUTC())} UTC`);
+    await context.send(`Текущая дата и время: ${utils.getDateTimes()}`);
 }
 
 const server_dt = async (context, vk) => {
-    await context.send(String(new Date()));
+    await context.send(getDateTimes("Europe/Moscow"));
 }
 
 module.exports = [

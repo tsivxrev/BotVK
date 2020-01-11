@@ -31,29 +31,34 @@ let uptime = () => {
     return (process.uptime() + "").toHHMMSS();
 }
 
-let isEmptyString = (str) => {
-    if (str) {
-        return false;
-    }
+let convertTime = (dateTimeISO) => {
+    let d = new Date(dateTimeISO);
     
-    return true;
-}
-
-let getDateTime = (date) => {
-    let year = date.getFullYear();
-    let month = ("0" + (date.getMonth() + 1)).substr(-2);
-    let day = ("0" + date.getDate()).substr(-2);
-    let hour = ("0" + date.getHours()).substr(-2);
-    let minutes = ("0" + date.getMinutes()).substr(-2);
-    let seconds = ("0" + date.getSeconds()).substr(-2);
+    let year = d.getFullYear();
+    let month = ("0" + (d.getMonth() + 1)).substr(-2);
+    let day = ("0" + d.getDate()).substr(-2);
+    let hour = ("0" + d.getHours()).substr(-2);
+    let minutes = ("0" + d.getMinutes()).substr(-2);
+    let seconds = ("0" + d.getSeconds()).substr(-2);
 
     return day + "." + month + "." + year + " " + hour + ":" + minutes + ":" + seconds;
 }
 
-let convertDateToUTC = () => {
-    let date = new Date();
-    date.toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}) 
-    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+let getDateTimes = (timeZone) => {
+    let options = {
+        day: '2-digit', 
+        month: '2-digit', 
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit', 
+        timeZone: timeZone || "UTC", 
+        timeZoneName: 'long',
+        hour12: false
+    }
+    
+    let d = new Date();
+    return d.toLocaleTimeString('en-GB', options);
 }
  
 String.prototype.toHHMMSS = function () {
@@ -71,11 +76,10 @@ String.prototype.toHHMMSS = function () {
 
 
 module.exports = {
-    getDateTime,
-    convertDateToUTC,
+    getDateTimes,
+    convertTime,
     uptime,
     getDataFromAPI,
     getGitCommitHash,
-    toStringJSON,
-    isEmptyString
+    toStringJSON
 };

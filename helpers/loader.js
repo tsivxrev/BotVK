@@ -4,7 +4,7 @@ let loadCommand = (command, func) => {
     })
 }
 
-let commandReceived = (fileToExport, func) => {
+let commandOnReceived = (fileToExport, func) => {
     fileToExport.forEach((pluginPart) => {
         try {
             let command = require(`../${pluginPart}`);
@@ -20,5 +20,5 @@ let commandReceived = (fileToExport, func) => {
 
 
 module.exports = {
-  commandReceived
+  commandOnReceived
 };
