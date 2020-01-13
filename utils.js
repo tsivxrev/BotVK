@@ -60,7 +60,7 @@ let getDateTimes = (timeZone) => {
     let d = new Date();
     return d.toLocaleTimeString('en-GB', options);
 }
- 
+
 String.prototype.toHHMMSS = function () {
     let sec_num = parseInt(this, 10); // don't forget the second param
     let hours   = Math.floor(sec_num / 3600);
