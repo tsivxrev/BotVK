@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const {convertTime} = require('../../utils');
+const {convertTime, getDataFromAPI} = require('../../utils');
 
 const GITHUB_REPO_REGEXP = /^\/git (([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*))?/;
 
@@ -13,12 +13,12 @@ const getGitHubRepo = async (context, vk) => {
 	}
 }
 
-let getDataFromAPI = async (url) => {
+/*let getDataFromAPI = async (url) => {
 	let response = await fetch(url);
 	
 	let data = response.json();
 	return data;
-}
+}*/
 
 let toHumanReadingData = (data) => {
 	if (data.message) {
