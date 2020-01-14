@@ -5,7 +5,7 @@ const dt = async (context, vk) => {
 }
 
 const server_dt = async (context, vk) => {
-    await context.send(getDateTimes("Europe/Moscow"));
+    await context.send(utils.getDateTimes("Europe/Moscow"));
 }
 
 module.exports = [
