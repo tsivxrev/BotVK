@@ -11,7 +11,7 @@ let getDataFromAPI = async (url) => {
         return data;
     }
     
-    throw new Error(response.status);
+    throw new Error(`Status: ${response.status} - ${await response.text()}`);
 }
 
 let toStringJSON = (data) => {
