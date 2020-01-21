@@ -15,8 +15,8 @@ const { updates } = vk;
 
 console.log("[] Initing plugins...");
 
-let pluginsHearFolder = fs.readdirSync("./src/plugins/hear");
-let pluginsOnFolder = fs.readdirSync("./src//plugins/on");
+let pluginsHearFolder = fs.readdirSync("./plugins/hear");
+let pluginsOnFolder = fs.readdirSync("./plugins/on");
 let fileToExportHear = [];
 let fileToExportOn = [];
 
