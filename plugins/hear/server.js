@@ -1,4 +1,4 @@
-const config = require('../../../config.json');
+const config = require('../../config.json');
 const utils = require('../../utils.js');
 
 const server = async (context) => {

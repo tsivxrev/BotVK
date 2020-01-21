@@ -1,4 +1,4 @@
-const info = require('../../../package.json');
+const info = require('../../package.json');
 const utils = require('../../utils.js');
 
 

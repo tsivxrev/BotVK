@@ -1,4 +1,4 @@
-let Markov = require('../../../utils/MarkovChain.js');
+let Markov = require('../../utils/MarkovChain.js');
 
 
 let answers8Ball = [
