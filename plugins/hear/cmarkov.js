@@ -141,7 +141,7 @@ Object.defineProperty(
 
 
 let magic8Balls = async (context, vk) => {
-    await context.send(`Шар говорит: ${answers8Ball.randElement()}`)
+    await context.send(`Шар говорит: "${answers8Ball.randElement()}"`)
 }
 
 let trumTrum = async (context, vk) => {
