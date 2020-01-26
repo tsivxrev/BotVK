@@ -2,6 +2,8 @@ const info = require('../../package.json');
 const utils = require('../../utils.js');
 
 
+/* ubi rerum testimonia adsunt quid opus est verbis */
+
 const about = async(context, vk) => {
 	await context.send(`
 	${info.name} - ${info.description}

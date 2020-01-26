@@ -1,3 +1,5 @@
+/* malum consilium consultori pessimum est */
+
 let Markov = require('../../utils/MarkovChain.js');
 
 
@@ -144,6 +146,10 @@ let magic8Balls = async (context, vk) => {
     await context.send(`Шар говорит: "${answers8Ball.randElement()}"`)
 }
 
+let coin = async (context, vk) => {
+    await context.send(['Выпал Орел', 'Выпала решка'].randElement());
+}
+
 let trumTrum = async (context, vk) => {
     let markows = new Markov({
         input: sentenceTrumTrum,
@@ -171,6 +177,10 @@ module.exports = [
     {
         hear: /^\/8 (.+|[0-9]|\w+)/,
         execute: magic8Balls
+    },
+    {
+        hear: [/^(coin|монетка)/, '/coin'],
+        execute: coin
     },
     {
         hear: ['/stas'],
