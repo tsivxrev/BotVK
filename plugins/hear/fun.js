@@ -1,6 +1,4 @@
-/* malum consilium consultori pessimum est */
-
-let Markov = require('../../utils/MarkovChain.js');
+const Markov = require('../../lib/MarkovChain.js');
 
 
 let answers8Ball = [
@@ -130,6 +128,25 @@ let sentenceStasIKakProsto = [
     'КУПИЛ ТОПОВЫЙ СМАРТФОН ЗА 9 990 – ОБЗОР!', 
 ];
 
+let requests = [
+    "и сделай 30 приседаний.",
+    "и сделай 20 классических отжиманий.",
+    "и сделай 20 отжиманий на кулаках.",
+    "и сделай 10 подтягиваний.",
+    "и сделай разминку шеи.",
+    "и сделай разминку рук.",
+    "и разминку тела",
+    "и сделай упражнения для туловища.",
+    "и сделай по 15 выпадов на каждую ногу.",
+    "и сделай по 5 наклонов в каждую сторону.",
+    "и сделай 20 наклонов вперед.",
+    "и сделай чай.",
+    "и сделай кофе.",
+    "и прочти книгу",
+    "и сделай уборку в доме."
+];
+
+ 
 Object.defineProperty(
     Object.prototype,
     'randElement',
@@ -141,9 +158,24 @@ Object.defineProperty(
     }
 );
 
-
 let magic8Balls = async (context, vk) => {
     await context.send(`Шар говорит: "${answers8Ball.randElement()}"`)
+}
+
+let requestPlease = async (context, vk) => {
+
+    await context.send({
+        attachment: 'photo502046138_457250333_7126224d0353b509d2',
+        message: `Оторвись от компа ${requests.randElement()}`
+    });
+}
+
+let requestPleaseCustom = async (context, vk) => {
+
+    await context.send({
+        attachment: 'photo502046138_457250333_7126224d0353b509d2',
+        message: `Оторвись от компа ${context.$match[1].split('').join('')}`
+    });
 }
 
 let coin = async (context, vk) => {
@@ -177,6 +209,14 @@ module.exports = [
     {
         hear: /^\/8 (.+|[0-9]|\w+)/,
         execute: magic8Balls
+    },
+    {
+        hear: ['/please', /^просьба/],
+        execute: requestPlease
+    },
+    {
+        hear: /\/плиз (.+)/,
+        execute: requestPleaseCustom
     },
     {
         hear: [/^(coin|монетка)/, '/coin'],
