@@ -1,4 +1,4 @@
-const mInfo = async (context) => {
+const mInfo = async (context, vk) => {
     context.loadMessagePayload()
     
     let msgId = context.id;
