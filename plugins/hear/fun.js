@@ -1,4 +1,6 @@
 const Markov = require('../../lib/MarkovChain.js');
+const { randElement } = require('../../utils');
+
 
 
 let answers8Ball = [
@@ -128,17 +130,6 @@ let sentenceStasIKakProsto = [
     'КУПИЛ ТОПОВЫЙ СМАРТФОН ЗА 9 990 – ОБЗОР!', 
 ];
 
- 
-Object.defineProperty(
-    Object.prototype,
-    'randElement',
-    {
-        value: function() {
-            var rand = Math.floor(Math.random() * this.length);
-            return this[rand];
-        }
-    }
-);
 
 let magic8Balls = async (context, vk) => {
     await context.send(`Шар говорит: "${answers8Ball.randElement()}"`)

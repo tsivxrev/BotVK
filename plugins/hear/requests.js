@@ -1,6 +1,11 @@
+const { randElement } = require('../../utils');
+
 
 let requests = [
+    /* @Euk0r давай еще реквесты */
     "и сделай 30 приседаний.",
+    "и сделай 20 приседаний.",
+    "и сделай 10 приседаний.",
     "и сделай 20 классических отжиманий.",
     "и сделай 20 отжиманий на кулаках.",
     "и сделай 10 подтягиваний.",
@@ -17,13 +22,6 @@ let requests = [
     "и сделай уборку в доме."
 ]
 
-
-Object.prototype.randElement = function (){
-    var rand = Math.floor(Math.random() * this.length);
-    
-    return this[rand];
-}
-
 let requestPlease = async (context, vk) => {
 
     await context.send({
@@ -39,8 +37,6 @@ let requestPleaseCustom = async (context, vk) => {
         message: `Оторвись от компа ${context.$match[1].split('').join('')}`
     });
 }
-
-
 
 
 module.exports = [

@@ -74,6 +74,12 @@ String.prototype.toHHMMSS = function () {
     return time;
 }
 
+Object.prototype.randElement = function (){
+    var rand = Math.floor(Math.random() * this.length);
+    
+    return this[rand];
+}
+
 
 module.exports = {
     getDateTimes,
@@ -81,5 +87,6 @@ module.exports = {
     uptime,
     getDataFromAPI,
     getGitCommitHash,
-    toStringJSON
+    toStringJSON,
+    randElement
 };
