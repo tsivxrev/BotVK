@@ -14,19 +14,8 @@ let requests = [
     "и сделай кофе.",
     "и прочти книгу",
     "и сделай уборку в доме."
-];
+]
 
-
-Object.defineProperty(
-    Object.prototype,
-    'randElement',
-    {
-        value: function() {
-            var rand = Math.floor(Math.random() * this.length);
-            return this[rand];
-        }
-    }
-);
 
 let requestPlease = async (context, vk) => {
 
@@ -42,6 +31,13 @@ let requestPleaseCustom = async (context, vk) => {
         attachment: 'photo502046138_457250333_7126224d0353b509d2',
         message: `Оторвись от компа ${context.$match[1].split('').join('')}`
     });
+}
+
+
+Object.prototype.randElement = function (){
+    var rand = Math.floor(Math.random() * this.length);
+    
+    return this[rand];
 }
 
 
