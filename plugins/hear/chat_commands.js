@@ -1,10 +1,6 @@
-const mInfo = async (context, vk) => {
+const mInfo = async (context) => {
     context.loadMessagePayload()
-
-    let msgId = context.id;
-    let msgInfo = await vk.api.call('messages.getById', {'message_ids': msgId});
-	
-    await context.reply(JSON.stringify(msgInfo, null, '\t'));
+	await context.reply(JSON.stringify(context, null, '\t'));
 }
 
 const shrug = async (context ,vk) => {
