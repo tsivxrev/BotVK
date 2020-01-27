@@ -7,10 +7,10 @@
 
  ``` js
  {
-	"TOKEN": "", /* Токен сообщества
-	"group_id": "", /* ID - сообщества для использования GroupPolling */
-	"admins": [], /* Список ID администраторов */
-	"is_explicit": true
+    "TOKEN": "", /* Токен сообщества
+    "group_id": "", /* ID - сообщества для использования GroupPolling */
+    "admins": [], /* Список ID администраторов */
+    "is_explicit": true
  }
  ```
 
@@ -35,30 +35,30 @@
 
 ```js
 const handler = async (cxt, vk) => {
-	// some code ...
+    // some code ...
 }
 
 module.exports = [
-	{
-		hear: '/text', // Текст с которым сверяет. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear
-		execute: handler // Обработчик
-	}
+    {
+        hear: '/text', // Текст с которым сверяет. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear
+        execute: handler // Обработчик
+    }
 ]
 
 ```
 
-Шаблон для on:	
+Шаблон для on:  
 
 ```js
 const hander = async (cxt, vk) => {
-	// some code...
+    // some code...
 }
 
 module.exports = [
-	{
-		type: 'message', // Тип события. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on 
-		execute: handler // Обработчик
-	}
+    {
+        type: 'message', // Тип события. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on 
+        execute: handler // Обработчик
+    }
 ]
 
 ```
