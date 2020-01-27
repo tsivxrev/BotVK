@@ -14,9 +14,10 @@
  }
  ```
 
- Токен сообщества указывать в файле `.env` либо в `config.json`
+ Токен сообщества указывать в файле `.env` либо в [`config.json`](config.json)
  
  ``` js
+ // .env
  TOKEN=""
  
  ```
@@ -24,10 +25,10 @@
 
 
 # Создание плагина
- Плагины бота расположены в `plugins/`. 
+ Плагины бота расположены в [`plugins/`](plugins/). 
 
- Для [hear](https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear) в  `plugins/hear`.
- Для [on](https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on) в `plugins/on`.
+ Для [hear](https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear) в  [`plugins/hear`](plugins/hear).
+ Для [on](https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on) в [`plugins/on`](plugins/on).
 
 ## Шаблон плагина
 
