@@ -35,14 +35,24 @@
 Шаблон для hear: 
 
 ```js
+let { uptime } = require('../../utils.js');
+
 const handler = async (cxt, vk) => {
     // some code ...
+}
+
+const uptime = async (ctx) => {
+    await ctx.send(`Uptime: ${utils.uptime()}`);
 }
 
 module.exports = [
     {
         hear: '/text', // Текст с которым сверяет. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear
         execute: handler // Обработчик
+    }, 
+    {
+        hear: '/uptime',
+        execute: uptime
     }
 ]
 
