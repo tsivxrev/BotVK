@@ -20,6 +20,9 @@
  TOKEN=""
  
  ```
+
+
+
 # Создание плагина
  Плагины бота расположены в `plugins/`. 
 
@@ -31,31 +34,31 @@
 Шаблон для hear: 
 
 ```js
-	const handler = async (cxt, vk) => {
-		// some code ...
-	}
+const handler = async (cxt, vk) => {
+	// some code ...
+}
 
-	module.exports = [
-		{
-			hear: '/text', // Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear
-			execute: handler 
-		}
-	]
+module.exports = [
+	{
+		hear: '/text', // Текст с которым сверяет. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#hear
+		execute: handler // Обработчик
+	}
+]
 
 ```
 
 Шаблон для on:	
 
 ```js
-	const hander = async (cxt, vk) => {
-		// some code...
-	}
+const hander = async (cxt, vk) => {
+	// some code...
+}
 
-	module.exports = [
-		{
-			type: 'message', // Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on 
-			execute: handler
-		}
-	]
+module.exports = [
+	{
+		type: 'message', // Тип события. Подробнее: https://github.com/negezor/vk-io/blob/master/docs/ru/api-reference/updates.md#on 
+		execute: handler // Обработчик
+	}
+]
 
 ```
