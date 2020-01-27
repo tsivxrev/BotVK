@@ -1,3 +1,4 @@
+
 let requests = [
     "и сделай 30 приседаний.",
     "и сделай 20 классических отжиманий.",
@@ -17,6 +18,12 @@ let requests = [
 ]
 
 
+Object.prototype.randElement = function (){
+    var rand = Math.floor(Math.random() * this.length);
+    
+    return this[rand];
+}
+
 let requestPlease = async (context, vk) => {
 
     await context.send({
@@ -34,11 +41,6 @@ let requestPleaseCustom = async (context, vk) => {
 }
 
 
-Object.prototype.randElement = function (){
-    var rand = Math.floor(Math.random() * this.length);
-    
-    return this[rand];
-}
 
 
 module.exports = [
@@ -47,7 +49,7 @@ module.exports = [
         execute: requestPlease
     },
     {
-        hear: /\/плиз (.+)/,
+        hear: /\/плиз (.+)$/,
         execute: requestPleaseCustom
     }
 ]
