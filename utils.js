@@ -69,8 +69,6 @@ const STATUS_CODES = {
   511: 'Network Authentication Required' // RFC 6585
 };
 
-isDetailResponse = true
-
 let getDataFromAPI = async (url) => {
     let response = await fetch(url);
     
@@ -79,7 +77,7 @@ let getDataFromAPI = async (url) => {
         return data;
     }
     
-    throw new Error(isDetailResponse ? `[Status: ${response.status}] - ${await response.text()}` : `[Status: ${response.status}] - ${STATUS_CODES[response.status] || `:(`}`);
+    throw new Error(`[Status: ${response.status}] - ${STATUS_CODES[response.status] || ':('}`);
 }
 
 let toStringJSON = (data) => {
