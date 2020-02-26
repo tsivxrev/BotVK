@@ -69,6 +69,7 @@ const STATUS_CODES = {
   511: 'Network Authentication Required' // RFC 6585
 };
 
+
 let getDataFromAPI = async (url) => {
     let response = await fetch(url);
     
@@ -80,9 +81,11 @@ let getDataFromAPI = async (url) => {
     throw new Error(`[Status: ${response.status}] - ${STATUS_CODES[response.status] || ':('}`);
 }
 
+
 let toStringJSON = (data) => {
     return JSON.stringify(data, null, '\t');
 }
+
 
 let getGitCommitHash = (long=true) => {
     try {
@@ -93,9 +96,11 @@ let getGitCommitHash = (long=true) => {
     }
 }
 
+
 let uptime = () => {
     return (process.uptime() + "").toHHMMSS();
 }
+
 
 let convertTime = (dateTimeISO) => {
     let d = new Date(dateTimeISO);
@@ -109,6 +114,7 @@ let convertTime = (dateTimeISO) => {
 
     return day + "." + month + "." + year + " " + hour + ":" + minutes + ":" + seconds;
 }
+
 
 let getDateTimes = (timeZone) => {
     let options = {
@@ -127,9 +133,11 @@ let getDateTimes = (timeZone) => {
     return d.toLocaleTimeString('en-GB', options);
 }
 
+
 let declOfNum = (num, titles) => {
     return titles[(num % 10 === 1 && num % 100 !== 11) ? 0 : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? 1 : 2]
 }
+
 
 String.prototype.toHHMMSS = function () {
     let sec_num = parseInt(this, 10); // don't forget the second param
@@ -143,6 +151,7 @@ String.prototype.toHHMMSS = function () {
     let time    = hours + ':' + minutes +':' + seconds;
     return time;
 }
+
 
 Object.prototype.randElement = function (){
     var rand = Math.floor(Math.random() * this.length);
